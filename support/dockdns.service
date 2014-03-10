@@ -1,0 +1,11 @@
+[Unit]
+Description=DockDNS Resolver
+After=sys-subsystem-net-devices-docker0.device
+
+[Service]
+ExecStart=/usr/bin/dockdns -forward 8.8.8.8:53 -zone docker. \
+          -docker unix://var/run/docker.sock -listen 172.17.42.1:53
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target
