@@ -64,10 +64,7 @@ func (r *DockerResolver) updateContainers() {
 			continue
 		}
 		ipaddr := containerJS.NetworkSettings.IPAddress
-		for _, n := range c.Names {
-			n = strings.TrimPrefix(n, "/")
-			containers[n] = ipaddr
-		}
+		containers[strings.TrimPrefix(containerJS.Name, "/")] = ipaddr
 	}
 	r.containers = containers
 }
